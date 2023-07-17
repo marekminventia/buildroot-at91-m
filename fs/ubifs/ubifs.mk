@@ -5,9 +5,9 @@
 ################################################################################
 
 UBIFS_OPTS = \
-	-e $(BR2_TARGET_ROOTFS_UBIFS_LEBSIZE) \
-	-c $(BR2_TARGET_ROOTFS_UBIFS_MAXLEBCNT) \
-	-m $(BR2_TARGET_ROOTFS_UBIFS_MINIOSIZE)
+        -e $(BR2_TARGET_ROOTFS_UBIFS_LEBSIZE) \
+        -c $(BR2_TARGET_ROOTFS_UBIFS_MAXLEBCNT) \
+        -m $(BR2_TARGET_ROOTFS_UBIFS_MINIOSIZE)
 
 ifeq ($(BR2_TARGET_ROOTFS_UBIFS_RT_ZLIB),y)
 UBIFS_OPTS += -x zlib
@@ -24,7 +24,8 @@ UBIFS_OPTS += $(call qstrip,$(BR2_TARGET_ROOTFS_UBIFS_OPTS))
 ROOTFS_UBIFS_DEPENDENCIES = host-mtd
 
 define ROOTFS_UBIFS_CMD
-	$(HOST_DIR)/sbin/mkfs.ubifs -d $(TARGET_DIR) $(UBIFS_OPTS) -o $@
+        $(HOST_DIR)/sbin/mkfs.ubifs -d $(TARGET_DIR) $(UBIFS_OPTS) -o $@
+        $(HOST_DIR)/sbin/mkfs.ubifs -o $(BINARIES_DIR)/data.ubifs -r $(BR2_EXTERNAL_INVENTIA_PATH)/board/inventia/agb_2000/data-overlay $(UBIFS_OPTS)
 endef
 
 $(eval $(rootfs))
